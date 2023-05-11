@@ -9,7 +9,7 @@ function hasCycle(head: ListNode | null): boolean {
         if (fast === slow) {
             return true
         }
-    }
+    } 
     return false
 };
 
