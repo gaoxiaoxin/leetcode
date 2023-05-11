@@ -18,5 +18,6 @@ function getSortStr(str: string):string {
 
 console.log(groupAnagrams(["cab","tin","pew","duh","may","ill","buy","bar","max","doc"]));
 
-
-console.log(['b', 'c', 'a'].sort());
+/**
+ * 利用字符串也能排序的方法进行排序
+ */
