@@ -4,6 +4,7 @@ function totalFruit(fruits: number[]): number {
   let sum = 0;
   let len = 3;
   let subL = 0;
+  while (sum <= 2) {}
 }
 
 /* 
