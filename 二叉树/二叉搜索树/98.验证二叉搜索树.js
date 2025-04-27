@@ -15,7 +15,7 @@ var isValidBST = function (root) {
   const traversal = (root) => {
     if (root === null) return true;
     const left = traversal(root.left);
-    if (pre !== root && pre.val >= root.val) return false;
+    if (pre !== null && pre.val >= root.val) return false;
     pre = root;
     const right = traversal(root.right);
     return left && right;
