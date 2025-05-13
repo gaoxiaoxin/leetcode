@@ -2,15 +2,20 @@
  * @param {number[][]} matrix
  */
 var NumMatrix = function (matrix) {
-  const result = [];
-  for (let i = 0; i < matrix.length; i++) {
-    let l = [0];
-    for (let j = 0; j < matrix[i].length; j++) {
-      l[j + 1] = matrix[i][j] + l[j];
+  const m = matrix.length;
+  const n = matrix[0].length;
+  this.preSum = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+  if (m === 0 || n === 0) return;
+  // 构造前缀和矩阵
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      this.preSum[i][j] =
+        this.preSum[i - 1][j] +
+        this.preSum[i][j - 1] +
+        matrix[i - 1][j - 1] -
+        this.preSum[i - 1][j - 1];
     }
-    result.push(l);
   }
-  this.value = result;
 };
 
 /**
@@ -21,13 +26,12 @@ var NumMatrix = function (matrix) {
  * @return {number}
  */
 NumMatrix.prototype.sumRegion = function (row1, col1, row2, col2) {
-  let sum = 0;
-  for (let i = row1; i <= row2; i++) {
-    const subSum = this.value[i][col2 + 1] - this.value[i][col1];
-    sum += subSum;
-  }
-
-  return sum;
+  return (
+    this.preSum[row2 + 1][col2 + 1] -
+    this.preSum[row1][col2 + 1] -
+    this.preSum[row2 + 1][col1] +
+    this.preSum[row1][col1]
+  );
 };
 
 /**
